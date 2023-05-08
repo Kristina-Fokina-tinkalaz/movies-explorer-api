@@ -1,0 +1,12 @@
+{
+    "country": "Russia",
+    "director": "Igor",
+    "duration": "1.54",
+    "year": "2021",
+    "description": "Большое описание фильма",
+    "image":  "https://www.dkmitino.ru/upload/iblock/2e6/1500910719-roskino.jpg",
+    "trailerLink": "https://www.dkmitino.ru/upload/iblock/2e6/1500910719-roskino.jpg",
+    "nameRU": "Имя на русском",
+    "nameEN": "The Name in English",
+    "thumbnail": "https://www.dkmitino.ru/upload/iblock/2e6/1500910719-roskino.jpg"
+}
