@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('express').Router();
@@ -6,6 +5,9 @@ const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const NotFoundError = require('./errors/not-found-err');
+
+// eslint-disable-next-line no-undef
+const { PORT = 3000 } = process.env;
 
 const app = express();
 
@@ -36,5 +38,5 @@ app.use((err, req, res, next) => {
   });
   next();
 });
-module.exports = app;
+app.listen(PORT);
 module.exports = router;
