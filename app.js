@@ -1,11 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('express').Router();
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
-const { PORT = 3000 } = process.env;
+const NotFoundError = require('./errors/not-found-err');
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use('/', require('./routes/auth'));
 app.use('/movies', auth, require('./routes/movies'));
 app.use('/users', auth, require('./routes/users'));
 
-app.use(() => {
+app.use(auth, () => {
   throw new NotFoundError('Такой страницы не существует');
 });
 
@@ -31,10 +31,10 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
     message: statusCode === 500
-      ? { message }
+      ? { message : 'Ошибка сервера'}
       : message,
   });
   next();
 });
-app.listen(PORT);
+module.exports = app;
 module.exports = router;

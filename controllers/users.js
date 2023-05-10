@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+// eslint-disable-next-line no-undef
 const { NODE_ENV, JWT_SECRET } = process.env;
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
@@ -21,7 +22,7 @@ module.exports.createUser = (req, res, next) => {
         name: user.name,
       });
     }).catch((err) => {
-      if (err.name === 'ValidationEror') {
+      if (err.name === 'ValidationError') {
         next(new NotValidError('Некорректные данные'));
       } else if (err.code === 11000) {
         next(new DataExistError('Такой email уже зарегистрирован'));
@@ -35,8 +36,8 @@ module.exports.getMe = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.send({
       _id: user._id,
-      email: user.email,
-      name: user.name
+      name: user.name,
+      email: user.email
     }))
     .catch(next);
 };
@@ -60,9 +61,11 @@ module.exports.updateProfile = (req, res, next) => {
       }
     })
     .catch((err) => {
-      if (err.name === 'ValidationEror') {
+      if (err.name === 'ValidationError') {
         next(new NotValidError('Некорректные данные'));
-      } else {
+      } if (err.code === 11000) {
+        next(new DataExistError('Такой email уже зарегистрирован'));
+      }  else {
         next(err);
       }
     });
