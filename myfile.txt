@@ -1,0 +1,13 @@
+{
+    "country": "Gljbsv",
+    "director": "dlfkjv",
+    "duration": "7789",
+    "year": "7890",
+    "description": "lsjhdbvljhabdlvjhbaldbajbdv",
+    "image": "https://avatars.mds.yandex.net/i?id=3680d6694ef3283f534c26bdc2d551bb401b1e2d-5233191-images-thumbs&n=13",
+    "trailerLink": "https://avatars.mds.yandex.net/i?id=3680d6694ef3283f534c26bdc2d551bb401b1e2d-5233191-images-thumbs&n=13",
+    "thumbnail": "https://avatars.mds.yandex.net/i?id=3680d6694ef3283f534c26bdc2d551bb401b1e2d-5233191-images-thumbs&n=13",
+    "movieId": "ejkahvrdljaehvfra",
+    "nameRU": "NameRu",
+    "nameEN": "hdljfvhblajbdv"
+}
