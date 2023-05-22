@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 const {
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 } = require('../controllers/movies');
 const validateUrl = require('../errors/validate-url');
 
@@ -21,7 +21,7 @@ router.post('/', celebrate({
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().custom(validateUrl),
-    movieId: Joi.string().required()
+    movieId: Joi.string().required(),
   }),
 }), createMovie);
 

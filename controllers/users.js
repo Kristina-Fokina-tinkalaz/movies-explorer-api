@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-// eslint-disable-next-line no-undef
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
@@ -37,7 +37,7 @@ module.exports.getMe = (req, res, next) => {
     .then((user) => res.send({
       _id: user._id,
       name: user.name,
-      email: user.email
+      email: user.email,
     }))
     .catch(next);
 };
@@ -65,7 +65,7 @@ module.exports.updateProfile = (req, res, next) => {
         next(new NotValidError('Некорректные данные'));
       } if (err.code === 11000) {
         next(new DataExistError('Такой email уже зарегистрирован'));
-      }  else {
+      } else {
         next(err);
       }
     });

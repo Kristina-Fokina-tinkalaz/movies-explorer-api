@@ -5,31 +5,9 @@ const Forbidden = require('../errors/forbidden-err');
 const NotValidError = require('../errors/not-valid-err');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({owner: req.user._id})
+  Movie.find({ owner: req.user._id })
     .then((movie) => {
-      const result = [];
-      if (movie === null) {
-        throw new NotFoundError('Вы пока не добавили ни одного фильма');
-      } else {
-      movie.forEach((movie) => {
-        result.push({
-          id: movie._id,
-          country: movie.country,
-          director: movie.director,
-          duration: movie.duration,
-          year: movie.year,
-          description: movie.description,
-          image: movie.image,
-          trailerLink: movie.trailer,
-          nameRU: movie.nameRU,
-          nameEN: movie.nameEN,
-          thumbnail: movie.thumbnail,
-          owner: movie.owner,
-          movieId: movie.movieId
-        });
-      });
-      res.send(result);
-      }
+      res.send(movie);
     })
     .catch(next);
 };
@@ -46,7 +24,7 @@ module.exports.createMovie = (req, res, next) => {
     nameRU,
     nameEN,
     thumbnail,
-    movieId
+    movieId,
   } = req.body;
   Movie.create({
     country,
@@ -63,7 +41,7 @@ module.exports.createMovie = (req, res, next) => {
     owner: req.user._id,
   })
     .then((movie) => {
-      res.send({ movie});
+      res.send({ movie });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -78,14 +56,11 @@ module.exports.deleteMovie = (req, res, next) => {
     .then((movie) => {
       if (movie === null) {
         throw new NotFoundError('Карточка фильма не найдена');
-      }
-       else if (!movie.owner.equals(req.user._id)) {
+      } else if (!movie.owner.equals(req.user._id)) {
         throw new Forbidden('Вы не можете удалить фильм, который добавил другой пользователь');
-      }
-      else {
+      } else {
         return Movie.findByIdAndRemove(req.params.id).then(() => res.send({ data: movie }));
       }
     })
     .catch(next);
 };
-
