@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const NotFoundError = require('./errors/not-found-err');
 
 const { PORT = 3000 } = process.env;
 const { NODE_ENV, DB_URL } = process.env;
@@ -22,10 +20,6 @@ app.use(express.json());
 app.use(requestLogger);
 app.use(helmet());
 app.use('/', require('./routes'));
-
-app.use(auth, () => {
-  throw new NotFoundError('Такой страницы не существует');
-});
 
 app.use(errorLogger);
 
