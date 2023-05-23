@@ -3,14 +3,12 @@ const jwt = require('jsonwebtoken');
 const AuthorizationError = require('../errors/authorization-err');
 require('dotenv').config();
 
-// eslint-disable-next-line no-undef
-const { JWT_SECRET , NODE_ENV } = process.env;
+const { JWT_SECRET, NODE_ENV } = process.env;
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-
     throw new AuthorizationError('Необходима авторизация');
   }
 
@@ -19,7 +17,6 @@ module.exports = (req, res, next) => {
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
-    console.log(err);
     throw new AuthorizationError('Необходима авторизация2');
   }
 
