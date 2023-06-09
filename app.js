@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('express').Router();
 const { errors } = require('celebrate');
+const cors = require('cors');
 const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -17,6 +18,8 @@ if (NODE_ENV === 'production') {
 }
 
 app.use(express.json());
+app.use(cors());
+app.options('*', cors());
 
 app.use(requestLogger);
 app.use(helmet());
