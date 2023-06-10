@@ -14,7 +14,7 @@ const { NODE_ENV, DB_URL } = process.env;
 const app = express();
 
 app.use(cors({ origin: ['http://localhost:3000/', 'localhost:3000', 'http://localhost:3000'], credentials: true }));
-app.options('*', cors());
+// app.options('*', cors());
 
 if (NODE_ENV === 'production') {
   mongoose.connect(DB_URL);
