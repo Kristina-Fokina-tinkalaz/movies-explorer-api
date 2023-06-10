@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('express').Router();
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const { errors } = require('celebrate');
 // const cors = require('./middlewares/cors');
 const cors = require('cors');
@@ -24,7 +24,8 @@ app.use(cors());
 app.options('*', cors());
 
 app.use(requestLogger);
-app.use(helmet());
+// app.use(helmet({ crossOriginResourcePolicy: false }));
+
 app.use('/', require('./routes'));
 
 app.use(errorLogger);
