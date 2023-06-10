@@ -13,6 +13,9 @@ const { PORT = 3000 } = process.env;
 const { NODE_ENV, DB_URL } = process.env;
 const app = express();
 
+app.use(cors());
+app.options('*', cors());
+
 if (NODE_ENV === 'production') {
   mongoose.connect(DB_URL);
 } else {
@@ -20,8 +23,6 @@ if (NODE_ENV === 'production') {
 }
 
 app.use(express.json());
-app.use(cors());
-app.options('*', cors());
 
 app.use(requestLogger);
 // app.use(helmet({ crossOriginResourcePolicy: false }));
