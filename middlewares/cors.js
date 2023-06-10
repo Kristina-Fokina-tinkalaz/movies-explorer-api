@@ -10,11 +10,8 @@ const allowedCors = [
 module.exports = (req, res, next) => {
   const { origin } = req.headers;
 
-  if (
-    allowedCors.some((e) => e.test && e.test(origin))
-    || allowedCors.includes(origin)
-  ) {
-    res.header('Access-Control-Allow-Origin', origin);
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', true);
   }
   const { method } = req;

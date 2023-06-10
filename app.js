@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const router = require('express').Router();
 const helmet = require('helmet');
 const { errors } = require('celebrate');
-// const cors = require('./middlewares/cors');
-const cors = require('cors');
+const cors = require('./middlewares/cors');
+// const cors = require('cors');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -13,8 +13,9 @@ const { PORT = 3000 } = process.env;
 const { NODE_ENV, DB_URL } = process.env;
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:3000/', 'localhost:3000', 'http://localhost:3000'], credentials: true }));
+// app.use(cors({ origin: ['http://localhost:3000/', 'localhost:3000', 'http://localhost:3000'], credentials: true }));
 // app.options('*', cors());
+app.use(cors);
 
 if (NODE_ENV === 'production') {
   mongoose.connect(DB_URL);
